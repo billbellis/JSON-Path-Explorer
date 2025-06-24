@@ -1,26 +1,35 @@
 # JSON-Path-Explorer
 
-## Περιγραφή
-Το JSON-Path-Explorer είναι ένα αναδρομικό εργαλείο ανάλυσης JSON αρχείων γραμμένο σε Python.  
-Παρουσιάζει εποπτικά τη δομή ενός αρχείου JSON — όσο περίπλοκη και αν είναι — και για κάθε τιμή δημιουργεί το path σε python syntax για απευθείας πρόσβαση στη συγκεκριμένη τιμή.
+## Description
+**JSON-Path-Explorer** is a recursive tool for analyzing JSON files, written in Python.  
+It visually displays the structure of a JSON file — no matter how complex — and generates the Python syntax path for directly accessing each value.
 
-## Λειτουργίες
-- Ανάλυση JSON αρχείων με φωλιασμένα λεξικά και λίστες.
-- Προβολή της δομής με αναδρομικό indent.
-- Παρουσίαση path για κάθε τιμή σε Python syntax.
-- Δυνατότητα αποθήκευσης του αποτελέσματος σε αρχείο.
+---
 
-## Απαιτήσεις
+## Features
+- Analysis of JSON files with nested dictionaries and lists.
+- Display of the structure with recursive indentation.
+- Presentation of the access path for each value in Python syntax.
+- Option to save the result to a file.
+
+---
+
+## Requirements
 - Python 3.x
 
-## Οδηγίες Χρήσης
-•	Βάλε το αρχείο `data.json` στον ίδιο φάκελο με το script.  
-•	Τρέξε το πρόγραμμα:
-```bash
-python json-path-explorer.py
-•	Το αποτέλεσμα θα εμφανιστεί στον τερματικό και αν θέλεις, μπορείς να το αποθηκεύσεις σε αρχείο.
-Παράδειγμα
-Για το JSON:
+---
+
+## Usage Instructions
+- Place the `data.json` file in the same folder as the script.  
+- Run the program:
+  ```bash
+  python working_with_JSON_v4.py
+  ```
+- The result will appear in the terminal, and you can optionally save it to a file.
+
+### Example  
+For the JSON:
+```json
 {
   "name": "Example",
   "details": {
@@ -28,41 +37,44 @@ python json-path-explorer.py
     "hobbies": ["reading", "cycling"]
   }
 }
-To πρόγραμμα θα εμφανίσει:
+```
 
-Λεξικό:
-  Κλειδί: 'name'
-    Απλή τιμή: 'Example'
+The program will display:
+```
+Dictionary:
+  Key: 'name'
+    Simple value: 'Example'
     path: data['name']
-  Κλειδί: 'details'
-    Λεξικό:
-      Κλειδί: 'age'
-        Απλή τιμή: 30
+  Key: 'details'
+    Dictionary:
+      Key: 'age'
+        Simple value: 30
         path: data['details']['age']
-      Κλειδί: 'hobbies'
-        Λίστα:
-          Στοιχείο #1:
-            Απλή τιμή: 'reading'
+      Key: 'hobbies'
+        List:
+          Item #1:
+            Simple value: 'reading'
             path: data['details']['hobbies'][0]
-          Στοιχείο #2:
-            Απλή τιμή: 'cycling'
+          Item #2:
+            Simple value: 'cycling'
             path: data['details']['hobbies'][1]
-Άδεια Χρήσης
-Διατίθεται υπό την MIT License.
+```
 
-Στον φάκελο θα βρείτε τα εξής αρχεία:
-data.json                   # Δοκιμαστικό JSON αρχείο
-LICENSE                     # Άδεια χρήσης (MΙΤ)
-README.md                   # Περιγραφή και οδηγίες χρήσης
-json-path-explorer.py       # Το βασικό πρόγραμμα
+---
 
+## License
+Distributed under the MIT License.
 
-Ιδέες για Επεκτάσεις
-•	Προσθήκη δυνατότητας αναζήτησης key ή τιμής μέσα στη δομή.
-•	Υποστήριξη JSON path syntax (π.χ. $.details.hobbies[0]).
-•	Γραφικό περιβάλλον (π.χ. με tkinter ή PyQt).
-•	Υποστήριξη επιλογής JSON αρχείου μέσω παραμέτρου στο command line.
-•	Εμφάνιση στατιστικών (π.χ. συνολικός αριθμός keys, μέγιστο βάθος κ.ά.)
+---
 
-Επικοινωνία
-Για προτάσεις ή βελτιώσεις: [vassilisbellis56@gmail.com]
+## Ideas for Extensions
+- Add a search function for keys or values within the structure.
+- Support for JSON path syntax (e.g., `$.details.hobbies[0]`).
+- Graphical user interface (e.g., using `tkinter` or `PyQt`).
+- Option to select the JSON file via command-line argument.
+- Display of statistics (e.g., total number of keys, maximum depth, etc.)
+
+---
+
+## Contact
+For suggestions or improvements: **vassilisbellis56@gmail.com**
