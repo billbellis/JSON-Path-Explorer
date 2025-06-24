@@ -1,3 +1,4 @@
+for Greek see README-gr.md
 # JSON-Path-Explorer
 
 ## Description
