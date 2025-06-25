@@ -2,22 +2,22 @@
 # -*- coding: utf-8 -*-
 
 """
-json-path-explorer.py
+json-path-explorer-en.py
 
-Περιγραφή:
-  Το πρόγραμμα διαβάζει ένα αρχείο JSON (data.json) και παρουσιάζει εποπτικά τη δομή του, όσο περίπλοκη και αν είναι (με φωλιασμένες λίστες και λεξικά), χρησιμοποιώντας αναδρομική συνάρτηση.
-  Επίσης, για κάθε τιμή δημιουργείται το path που πρέπει να χρησιμοποιηθεί σε περιβάλλον Python  για την πρόσβαση σε αυτήν.
+Description:
+  This program reads a JSON file (data.json) and displays its structure visually — no matter how complex (with nested lists and dictionaries) — using a recursive function.
+  It also generates, for each value, the Python syntax path required to access it.
 
 Input:
-  Το αρχείο 'data.json' πρέπει να βρίσκεται στον ίδιο φάκελο με το script και να περιέχει έγκυρα δεδομένα JSON.
+  The 'data.json' file must be located in the same folder as the script and contain valid JSON data.
 
 Output:
-  Εμφανίζει τη δομή του JSON στον τερματικό με κατάλληλο indentation, ενδείξεις τύπων δεδομένων και το path πρόσβασης σε κάθε τιμή.
+  Displays the JSON structure in the terminal with proper indentation, data type indicators, and the access path for each value.
 
-Συντάκτης: Βασίλειος Μπέλλης 
-Ημερομηνία: 23/06/2025
+Author: Vassilis Bellis
+Date: 23/06/2025
 
-Απαιτήσεις:
+Requirements:
   Python 3.x
 """
 
@@ -26,67 +26,67 @@ import json
 
 def analyze_content(data, path_str="data", level=0, output=None):
     """
-    Αναλύει αναδρομικά τη δομή ενός αντικειμένου JSON και δημιουργεί αναφορά με indent.
-    Επίσης, δημιουργεί για κάθε τιμή το path που μπορεί να χρησιμοποιηθεί σε περιβάλλον Python για την πρόσβαση σε αυτήν.
+    Recursively analyzes the structure of a JSON object and generates a report with indentation.
+    It also generates, for each value, the Python path to access it.
 
     Args:
-        data: Τα δεδομένα JSON (dict, list ή απλή τιμή)
-        path_str: Το path πρόσβασης σε κάθε τιμή
-        level: Το επίπεδο βάθους για indent
-        output: Λίστα στην οποία προστίθεται η ανάλυση (προαιρετική)
+        data: The JSON data (dict, list, or simple value)
+        path_str: The access path for each value
+        level: The indentation depth level
+        output: List to append the analysis result (optional)
 
     Returns:
-        output (list): Λίστα γραμμών με τη δομή των δεδομένων και το path πρόσβασης σε κάθε τιμή
+        output (list): List of lines describing the data structure and access paths
     """
     output = output or []
     indent = "  " * level
 
     if isinstance(data, dict):
-        output.append(f"{indent}Λεξικό:")
+        output.append(f"{indent}Dictionary:")
         for key, value in data.items():
-            output.append(f"{indent}  Κλειδί: '{key}'")
+            output.append(f"{indent}  Key: '{key}'")
             new_path = f"{path_str}['{key}']"
             analyze_content(value, new_path, level + 1, output)
 
     elif isinstance(data, list):
-        output.append(f"{indent}Λίστα:")
+        output.append(f"{indent}List:")
         for index, item in enumerate(data):
-            output.append(f"{indent}  Στοιχείο #{index + 1}:")
+            output.append(f"{indent}  Item #{index + 1}:")
             new_path = f"{path_str}[{index}]"
             analyze_content(item, new_path, level + 1, output)
 
     else:
-        output.append(f"{indent}Απλή τιμή: {repr(data)}")
+        output.append(f"{indent}Simple value: {repr(data)}")
         output.append(f"{indent}path: {path_str}")
     return output
 
 
 def main():
     """
-    Κεντρική συνάρτηση που διαβάζει το αρχείο και καλεί την analyze_content.
+    Main function that reads the file and calls analyze_content.
     """
     try:
         with open("data.json", encoding="utf-8") as f:
             data = json.load(f)
     except FileNotFoundError:
-        print("Σφάλμα: Το αρχείο 'data.json' δεν βρέθηκε.")
+        print("Error: The file 'data.json' was not found.")
         return
     except json.JSONDecodeError as e:
-        print(f"Σφάλμα: Το αρχείο δεν περιέχει έγκυρα JSON δεδομένα. ({e})")
+        print(f"Error: The file does not contain valid JSON data. ({e})")
         return
 
     result = analyze_content(data)
 
-    # Εμφάνιση στον τερματικό
+    # Display result in terminal
     for line in result:
         print(line)
 
-    # Επιλογή αποθήκευσης σε αρχείο
-    save_choice = input("\nΘέλεις να αποθηκευτεί το αποτέλεσμα σε αρχείο (Ν/Ο); ").strip().lower()
-    if save_choice == "ν":
+    # Option to save to file
+    save_choice = input("\nDo you want to save the result to a file? (Y/N): ").strip().lower()
+    if save_choice == "y":
         with open("structure_output.txt", "w", encoding="utf-8") as out_file:
             out_file.write("\n".join(result))
-        print("Η δομή αποθηκεύτηκε στο 'structure_output.txt'.")
+        print("The structure was saved to 'structure_output.txt'.")
 
 
 if __name__ == "__main__":
